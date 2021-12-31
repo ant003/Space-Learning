@@ -39,8 +39,8 @@ func _on_MobTimer_timeout():
 	# Set the mob's position to a random location.
 	mob.position = $MobPath/MobSpawnLocation.position
 	# Add some randomness to the direction.
-	direction += rand_range(-PI / 4, PI / 4)
-	mob.rotation = direction
+#	direction += rand_range(-PI / 4, PI / 4)
+#	mob.rotation = direction
 	# Set the velocity (speed & direction).
 	mob.linear_velocity = Vector2(rand_range(mob.min_speed, mob.max_speed), 0)
 	mob.linear_velocity = mob.linear_velocity.rotated(direction)
