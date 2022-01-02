@@ -17,7 +17,7 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=2]
 height = 32.0
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="RigidBody2D" type="RigidBody2D" groups=["mobs"]]
 collision_mask = 0
 physics_material_override = SubResource( 3 )
 gravity_scale = 0.0
