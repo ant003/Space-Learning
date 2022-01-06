@@ -31,7 +31,7 @@ func new_game():
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.show_message("Preparate")
+	$HUD.show_message("Prepárate")
 	$Music.play()
 
 
