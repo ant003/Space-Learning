@@ -16,6 +16,7 @@ _data = {
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 Mob = ExtResource( 3 )
+Coin = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -52,14 +53,7 @@ stream = ExtResource( 5 )
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 
-[node name="Coin" parent="." instance=ExtResource( 7 )]
-position = Vector2( 500, 300 )
-
-[node name="CoinPosition" type="Position2D" parent="."]
-position = Vector2( 500, 300 )
-
 [connection signal="hit" from="Player" to="." method="gamer_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
-[connection signal="hit" from="Coin" to="." method="update_score"]
