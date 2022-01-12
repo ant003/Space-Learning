@@ -8,8 +8,8 @@ func _ready():
 	pass # Replace with function body.
 
 func show_message(text):
-	$Message.text = text
-	$Message.show()
+	$BottomInfo/GameInfo/Message.text = text
+	$BottomInfo/GameInfo/Message.show()
 	$MessageTimer.start()
 
 func show_game_over():
@@ -17,20 +17,20 @@ func show_game_over():
 	# Wait until the MessageTimer has counted down.
 	yield($MessageTimer, "timeout")
 
-	$Message.text = "Esquiva  y\natrapa monedas!"
-	$Message.show()
+	$BottomInfo/GameInfo/Message.text = "Esquiva  y\natrapa monedas!"
+	$BottomInfo/GameInfo/Message.show()
 	# Make a one-shot timer and wait for it to finish.
 	yield(get_tree().create_timer(1), "timeout")
-	$StartButton.show()
+	$BottomInfo/GameInfo/StartButton.show()
 	
 func update_score(score):
-	$ScoreLabel.text = str(score)
+	$TopInfo/GameInfo/ScoreLabel.text = str(score)
 	
 
 func _on_MessageTimer_timeout():
-	$Message.hide()
+	$BottomInfo/GameInfo/Message.hide()
 
 
 func _on_StartButton_pressed():
-	 $StartButton.hide()
+	 $BottomInfo/GameInfo/StartButton.hide()
 	 emit_signal("start_game")
