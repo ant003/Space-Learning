@@ -2,6 +2,7 @@ extends Node
 
 export (PackedScene) var Mob
 export (PackedScene) var Coin
+export (PackedScene) var Emerald
 var score
 var screen_size  # Size of the game window.
 
@@ -16,7 +17,7 @@ func update_score():
 
 func new_coin():
 	var coin = Coin.instance()
-#	Deferred ensures
+#	Deferred ensures the function is thread safe
 	call_deferred("add_child", coin)
 	var x_range = Vector2(50, 974)
 	var y_range = Vector2(50, 550)
@@ -26,6 +27,21 @@ func new_coin():
 	coin.position = random_pos
 	coin.connect("hit", self, "new_coin")
 	coin.connect("hit", self, "update_score")
+	
+func new_emerald():
+	$HUD.update_tip()
+	# Make a one-shot timer and wait for it to finish.
+	yield(get_tree().create_timer(10), "timeout")
+	var emerald = Emerald.instance()
+	call_deferred("add_child", emerald)
+	var x_range = Vector2(50, 974)
+	var y_range = Vector2(50, 550)
+	var random_x = randi() % int(x_range[1]- x_range[0]) + 1 + x_range[0] 
+	var random_y =  randi() % int(y_range[1]-y_range[0]) + 1 + y_range[0]
+	var random_pos = Vector2(random_x, random_y)
+	emerald.position = random_pos
+	emerald.connect("hit", self, "new_emerald")
+	emerald.connect("hit", self, "update_score")
 	
 
 func gamer_over():
@@ -38,13 +54,13 @@ func gamer_over():
 	
 func new_game():
 	score = 0
-	new_coin()
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Prepárate")
 	$Music.play()
-	$HUD.update_tip()
+	new_coin()
+	new_emerald()
 	
 
 func _on_MobTimer_timeout():
