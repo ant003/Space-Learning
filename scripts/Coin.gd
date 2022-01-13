@@ -7,13 +7,12 @@ func _ready():
 	pass
 
 func _on_Coin_area_entered(area):
-	emit_signal("hit")
-#	$CollisionShape2D.set_deferred("disabled", true)
-	call_deferred("queue_free") # 
-	#queue_free()
+	if (area.is_in_group("Player")):
+		emit_signal("hit")
+		call_deferred("queue_free")
+	
 	
 func start(pos):
 	position = pos
 	show()
-#	$CollisionShape2D.disabled = false
 
