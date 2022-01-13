@@ -1,11 +1,28 @@
 extends CanvasLayer
 
 signal start_game
+var phrases
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	
+#func read():
+#	var file = File.new()
+#	file.open("phrases.txt", File.READ)
+#	var content = file.get_line()
+#	file.close()
+#	return content
+
+func open_file(path):
+	phrases = File.new()
+	phrases.open(path,File.READ)
+	
+	
+
+func update_tip():
+	$TopInfo/GameInfo/Tip.text = phrases.get_line()
 
 func show_message(text):
 	$BottomInfo/GameInfo/Message.text = text
@@ -22,6 +39,7 @@ func show_game_over():
 	# Make a one-shot timer and wait for it to finish.
 	yield(get_tree().create_timer(1), "timeout")
 	$BottomInfo/GameInfo/StartButton.show()
+	phrases.close()
 	
 func update_score(score):
 	$TopInfo/GameInfo/ScoreLabel.text = str(score)
@@ -32,5 +50,7 @@ func _on_MessageTimer_timeout():
 
 
 func _on_StartButton_pressed():
-	 $BottomInfo/GameInfo/StartButton.hide()
-	 emit_signal("start_game")
+	open_file("phrases.txt")
+	$BottomInfo/GameInfo/StartButton.hide()
+	emit_signal("start_game")
+	

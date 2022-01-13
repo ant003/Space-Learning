@@ -45,14 +45,15 @@ __meta__ = {
 
 [node name="Tip" type="Label" parent="TopInfo/GameInfo"]
 margin_left = 454.0
-margin_top = 23.0
+margin_top = 37.0
 margin_right = 904.0
-margin_bottom = 76.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 5 )
-text = "Mercurio es el primer planeta desde el sol y
-además es genial por ejemplo"
+text = "Mercurio es el primer planeta desde el sol"
+align = 1
 valign = 1
+autowrap = true
 
 [node name="BottomInfo" type="MarginContainer" parent="."]
 anchor_top = 0.5
@@ -75,6 +76,7 @@ custom_fonts/font = SubResource( 4 )
 text = "Esquiva  y 
 atrapa monedas"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

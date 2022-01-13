@@ -44,8 +44,8 @@ func new_game():
 	$HUD.update_score(score)
 	$HUD.show_message("Prepárate")
 	$Music.play()
+	$HUD.update_tip()
 	
-
 
 func _on_MobTimer_timeout():
 	# Choose a random location on Path2D.
