@@ -17,13 +17,13 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=2]
 height = 12.0
 
-[node name="Emerald" type="Area2D"]
+[node name="Emerald" type="Area2D" groups=["emeralds"]]
 script = ExtResource( 5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." groups=["emeralds"]]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

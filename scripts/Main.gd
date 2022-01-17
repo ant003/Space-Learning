@@ -4,7 +4,8 @@ export (PackedScene) var Mob
 export (PackedScene) var Coin
 export (PackedScene) var Emerald
 var score
-var screen_size  # Size of the game window.
+# Size of the game window.
+var screen_size 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,18 +32,27 @@ func new_coin():
 	coin.connect("hit", self, "update_score", [100])
 	
 func new_emerald():
-	$HUD.update_tip()
-	# Make a one-shot timer and wait for it to finish.
-	yield(get_tree().create_timer(10), "timeout")
 	var emerald = Emerald.instance()
 	call_deferred("add_child", emerald)
 	emerald.position = gen_rand_pos()
-	emerald.connect("hit", self, "new_emerald")
+	emerald.connect("hit", self, "reboot_temp")
+	emerald.connect("hit", $HUD, "update_tip")
 	emerald.connect("hit", self, "update_score", [500])
+
+func reboot_temp():
+	$EmeraldTimer.start()
 	
+func _on_EmeraldTimer_timeout():
+	new_emerald()
+	
+	
+func _on_StartTimer_timeout():
+	$MobTimer.start()
+	$EmeraldTimer.start()
 
 func gamer_over():
 	$MobTimer.stop()
+	$EmeraldTimer.stop()
 	$HUD.show_game_over()
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("coins", "queue_free")
@@ -58,7 +68,6 @@ func new_game():
 	$HUD.show_message("Prepárate")
 	$Music.play()
 	new_coin()
-	new_emerald()
 
 func _on_MobTimer_timeout():
 	# Choose a random location on Path2D.
@@ -73,6 +82,3 @@ func _on_MobTimer_timeout():
 	# Set the velocity (speed & direction).
 	mob.linear_velocity = Vector2(rand_range(mob.min_speed, mob.max_speed), 0)
 	mob.linear_velocity = mob.linear_velocity.rotated(direction)
-
-func _on_StartTimer_timeout():
-	$MobTimer.start()

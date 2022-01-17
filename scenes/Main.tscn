@@ -38,6 +38,10 @@ wait_time = 0.5
 wait_time = 2.0
 one_shot = true
 
+[node name="EmeraldTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 256, 300 )
 
@@ -58,4 +62,5 @@ stream = ExtResource( 6 )
 [connection signal="hit" from="Player" to="." method="gamer_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="EmeraldTimer" to="." method="_on_EmeraldTimer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
