@@ -16,8 +16,8 @@ func update_score(points):
 	$HUD.update_score(score)
 	
 func gen_rand_pos():
-	var x_range = Vector2(50, 974)
-	var y_range = Vector2(50, 550)
+	var x_range = Vector2(128, 974)
+	var y_range = Vector2(128, 550)
 	var random_x = randi() % int(x_range[1]- x_range[0]) + 1 + x_range[0] 
 	var random_y =  randi() % int(y_range[1]-y_range[0]) + 1 + y_range[0]
 	var random_pos = Vector2(random_x, random_y)
