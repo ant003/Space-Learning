@@ -90,6 +90,7 @@ text = "Puntuación Máxima"
 margin_top = 229.0
 margin_right = 406.0
 margin_bottom = 274.0
+mouse_filter = 0
 custom_fonts/font = SubResource( 1 )
 text = "Salir"
 
@@ -111,3 +112,4 @@ texture = SubResource( 3 )
 expand = true
 
 [connection signal="gui_input" from="HBoxContainer/VBoxContainer/MenuOptions/NewGame" to="." method="_on_NewGame_gui_input"]
+[connection signal="gui_input" from="HBoxContainer/VBoxContainer/MenuOptions/Exit" to="." method="_on_Exit_gui_input"]

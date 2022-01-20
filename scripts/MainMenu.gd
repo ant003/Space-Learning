@@ -20,3 +20,9 @@ func _on_NewGame_gui_input(event):
 	if (event is InputEventMouseButton && event.pressed 
 	&& event.button_index == 1):
 		emit_signal("start_game")
+
+
+func _on_Exit_gui_input(event):
+	if (event is InputEventMouseButton && event.pressed 
+	&& event.button_index == 1):
+		get_tree().quit()
