@@ -82,6 +82,7 @@ __meta__ = {
 }
 
 [node name="StartButton" type="Button" parent="BottomInfo/GameInfo"]
+visible = false
 margin_left = 311.0
 margin_top = 238.0
 margin_right = 713.0

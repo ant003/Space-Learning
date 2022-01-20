@@ -9,7 +9,21 @@ var screen_size
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$MainMenu.show()
+	hide_game_elem()
 	randomize()
+	
+func hide_game_elem():
+	$Player.hide()
+	$StartPosition.hide()
+	$MobPath.hide()
+	$HUD.hide()
+
+func show_game_elem():
+	$Player.show()
+	$StartPosition.show()
+	$MobPath.show()
+	$HUD.hide()
 
 func update_score(points):
 	score += points
@@ -45,29 +59,37 @@ func reboot_temp():
 func _on_EmeraldTimer_timeout():
 	new_emerald()
 	
-	
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$EmeraldTimer.start()
 
 func gamer_over():
+	$Music.stop()
+	$DeathSound.play() 
 	$MobTimer.stop()
 	$EmeraldTimer.stop()
 	$HUD.show_game_over()
+	yield(get_tree().create_timer(3), "timeout")
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("coins", "queue_free")
 	get_tree().call_group("emeralds", "queue_free")
-	$Music.stop()
-	$DeathSound.play() 
+	$HUD.hide()
+	$MainMenu.show()
 	
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.show_message("Prepárate")
+	$HUD.load_tips()
+	$MainMenu.hide()
+	$HUD.show()
 	$Music.play()
 	new_coin()
+	$HUD.show_message("Esquiva  y\natrapa monedas!")
+	yield($HUD/MessageTimer, "timeout")
+	$HUD.show_message("Prepárate")
+	
 
 func _on_MobTimer_timeout():
 	# Choose a random location on Path2D.

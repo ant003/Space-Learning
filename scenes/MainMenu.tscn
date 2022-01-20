@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/Gewtymol.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Rocket2.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/Rocket5.png" type="Texture" id=4]
 [ext_resource path="res://assets/Rocket1.png" type="Texture" id=5]
 [ext_resource path="res://assets/Rocket4.png" type="Texture" id=6]
+[ext_resource path="res://scripts/MainMenu.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=2]
 size = 65
@@ -38,6 +39,7 @@ margin_right = -120.0
 margin_bottom = -80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -73,6 +75,7 @@ alignment = 1
 margin_top = 97.0
 margin_right = 406.0
 margin_bottom = 142.0
+mouse_filter = 0
 custom_fonts/font = SubResource( 1 )
 text = "Nuevo juego"
 
@@ -106,3 +109,5 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource( 3 )
 expand = true
+
+[connection signal="gui_input" from="HBoxContainer/VBoxContainer/MenuOptions/NewGame" to="." method="_on_NewGame_gui_input"]

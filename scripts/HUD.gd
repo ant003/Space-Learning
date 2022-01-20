@@ -8,6 +8,8 @@ var phrases
 func _ready():
 	pass # Replace with function body.
 	
+func load_tips():
+	open_file("phrases.txt")
 
 func open_file(path):
 	phrases = File.new()
@@ -29,12 +31,16 @@ func show_game_over():
 	show_message("Juego terminado")
 	# Wait until the MessageTimer has counted down.
 	yield($MessageTimer, "timeout")
-	$BottomInfo/GameInfo/Message.text = "Esquiva  y\natrapa monedas!"
-	$BottomInfo/GameInfo/Message.show()
-	# Make a one-shot timer and wait for it to finish.
 	yield(get_tree().create_timer(1), "timeout")
-	$BottomInfo/GameInfo/StartButton.show()
-	phrases.close()
+#	phrases.close()
+	
+func hide():
+	$TopInfo.hide()
+	$BottomInfo.hide()
+	
+func show():
+	$TopInfo.show()
+	$BottomInfo.show()
 	
 func update_score(score):
 	$TopInfo/GameInfo/ScoreLabel.text = str(score)
